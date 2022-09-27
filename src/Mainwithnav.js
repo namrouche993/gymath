@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import AdbIcon from '@mui/icons-material/Adb';
  
 /////***NOO maybe false***//import Link from '@mui/material/Link';
  
@@ -14,8 +15,13 @@ import Button from '@mui/material/Button';
 
 
 export default function Mainwithnav() {
+ 
+
   return (
     <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} >
+        <p style={{textAlign:'center'}}>Sidali Gym</p>
+      </AppBar>
       <AppBar position="static">
         <Toolbar>
           
@@ -43,20 +49,20 @@ export default function Mainwithnav() {
             SIDALI <br></br> GYM
           </Typography>
           <Box sx={{ flexGrow: 1 }} >
-        <Button href='/home' variant="h1">
+        <Button href='/home' variant={document.location.pathname=="/home" ? ("contained"):("h6")}>
             Home
         </Button> 
-          <Button href='/news' variant="h6">
+          <Button href='/news' variant={document.location.pathname=="/news" ? ("contained"):("h6")}>
             News
           </Button>          
-          <Button href='/contact' variant="h6">
+          <Button href='/contact' variant={document.location.pathname=="/contact" ? ("contained"):("h6")}>
             Contact
           </Button>  
-          <Button href='/about' variant="h6">
+          <Button href='/about' variant={document.location.pathname=="/about" ? ("contained"):("h6")}>
             About
           </Button>
         </Box>
-             <Button color="inherit">Login</Button>
+        <AdbIcon sx={{display: { xs: 'none', md: 'flex' }, mr: 1 }} />
 
         </Toolbar>
       </AppBar>
