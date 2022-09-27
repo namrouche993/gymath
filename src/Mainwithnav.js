@@ -4,10 +4,13 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import AdbIcon from '@mui/icons-material/Adb';
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+ 
+/////***NOO maybe false***//import Link from '@mui/material/Link';
+ 
+//import IconButton from '@mui/material/IconButton';
+//import MenuIcon from '@mui/icons-material/Menu';
+//import AdbIcon from '@mui/icons-material/Adb';
+//import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 
 
 export default function Mainwithnav() {
@@ -39,20 +42,22 @@ export default function Mainwithnav() {
           >
             SIDALI <br></br> GYM
           </Typography>
-
-        <Button variant="h1">
-            Hello!
+          <Box sx={{ flexGrow: 1 }} >
+        <Button href='/home' variant="h1">
+            Home
         </Button> 
-          <Button variant="h6" component="div">
+          <Button href='/news' variant="h6">
             News
           </Button>          
-          <Button variant="h6" component="div">
+          <Button href='/contact' variant="h6">
             Contact
-          </Button>          
-          <Button variant="h6" component="div">
+          </Button>  
+          <Button href='/about' variant="h6">
             About
           </Button>
-          <Button color="inherit">Login</Button>
+        </Box>
+             <Button color="inherit">Login</Button>
+
         </Toolbar>
       </AppBar>
     </Box>
