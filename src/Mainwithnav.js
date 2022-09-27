@@ -6,24 +6,52 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import AdbIcon from '@mui/icons-material/Adb';
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+
 
 export default function Mainwithnav() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
+          
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+              marginRight: '50px',
+              fontSize: '22px',
+              borderRight: '5px #fff solid',
+              paddingRight: '10px',
+              lineHeight: '1.1',
+              textAlign: '-webkit-right'
+            }}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            SIDALI <br></br> GYM
           </Typography>
+
+        <Button variant="h1">
+            Hello!
+        </Button> 
+          <Button variant="h6" component="div">
+            News
+          </Button>          
+          <Button variant="h6" component="div">
+            Contact
+          </Button>          
+          <Button variant="h6" component="div">
+            About
+          </Button>
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
