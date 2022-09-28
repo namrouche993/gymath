@@ -22,7 +22,7 @@ export default function Mainwithnav() {
       <AppBar position="static" sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} >
         <p style={{textAlign:'center'}}>Sidali Gym</p>
       </AppBar>
-      <AppBar position="static">
+      <AppBar position="static" sx={{marginBottom:'1.0rem'}}>
         <Toolbar>
           
           <Typography
