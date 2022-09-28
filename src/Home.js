@@ -22,7 +22,8 @@ export default function Home() {
   return (
     <div>
       {/*<Box sx={{maxWidth:{xs:'100px',md:'600px'}}}>*/}
-      <Grid sx={{width:{xs:'100%',md:'100%'}}}>
+    <Grid container>
+      <Grid item xs={12} md={6}>
         <MUIDataTable
           title={"Employee List"}
           data={data}
@@ -30,6 +31,7 @@ export default function Home() {
           options={options}
         />
         </Grid>
+      </Grid>
       {/* </Box> */}
     </div>
   )
