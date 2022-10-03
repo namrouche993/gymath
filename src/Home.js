@@ -3,34 +3,118 @@ import MUIDataTable from "mui-datatables";
 import { Grid,Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 
 //https://codesandbox.io/s/github/gregnb/mui-datatables
 //https://github.com/gregnb/mui-datatables
 const columns = [
-  {name:"nom et Prenom"},
-  {name:"Date de naissance"},
-  {name:"date de abonnement"},
-  {name:"Montant"},
-  {name:"Notes"},
+  {name:"nom et Prenom",
+  options:{
+     setCellProps:()=>({
+      style:{
+        padding:'3px 3px 3px 3%',letterSpacing:'0.13071em'
+      }
+     }),
+  setCellHeaderProps: (value) => ({style:{background: "#2f2f2f",color:'#fff',height:'40px'}})} 
+  },
+  {name:"Date de naissance",
+  options:{
+    setCellProps:()=>({
+     style:{
+       padding:'3px 3px 3px 3%',letterSpacing:'0.13071em'
+     }
+    }),filterOptions: { fullWidth: false },    setCellHeaderProps: (value) => ({style:{background: "#2f2f2f",color:'#fff',height:'40px'}})} 
+},
+  {name:"date de abonnement",
+  options:{
+    setCellProps:()=>({
+     style:{
+       padding:'3px 3px 3px 3%',letterSpacing:'0.13071em'
+     }
+    }),filterOptions: { fullWidth: false },    setCellHeaderProps: (value) => ({style:{background: "#2f2f2f",color:'#fff',height:'40px'}})} 
+},
+  {name:"Montant",
+  options:{
+    setCellProps:()=>({
+     style:{
+       padding:'3px 3px 3px 3%',letterSpacing:'0.13071em'
+     }
+    }),filterOptions: { fullWidth: false },    setCellHeaderProps: (value) => ({style:{background: "#2f2f2f",color:'#fff',height:'40px'}})} 
+},
+  {name:"Notes",
+  options:{
+    setCellProps:()=>({
+     style:{
+       padding:'3px 3px 3px 3%',letterSpacing:'0.13071em'
+     }
+    }),    setCellHeaderProps: (value) => ({style:{background:'#2f2f2f',color:'#fff'}})} 
+},
 {
-  name:"edit_button",options:{
+  name:"",options:{
+    
+    setCellProps:()=>({
+      style:{
+        padding:'0px'
+      }
+     }),
+    setCellHeaderProps: (value) => (
+      {
+       style: {
+          //'paddingRight': '20px',
+           background: "#2f2f2f",
+           color:'#fff',
+           height:'40px',
+           margin:'-50px'
+
+        }
+      }
+    ),
     customBodyRender: (value, tableMeta, updateValue) => {  
       console.log('output of value is : ');
       console.log(value);
       console.log('output of tableMeta is :')
       console.log(tableMeta);
             return (
-                    <Button variant='contained'
-                      sx={{fontSize:'5px'}}                    
-                    onClick={()=>alert(tableMeta.rowIndex)}><EditIcon/></Button>
+                    <Button variant='outlined' size='small' color='inherit'
+                      //sx={{fontSize:'5px'}}                    
+                    onClick={()=>alert(tableMeta.rowIndex)}><EditIcon fontSize="small"/>                      
+                     </Button>
                     );
                   }
                   
 }
 },
 
-{name:"remove_button"}
+{name:"",
+options:{
+  setCellProps:()=>({
+   style:{
+     padding:'0px'
+   }
+  }),    setCellHeaderProps: (value) => (
+  {
+    style:{
+      background: "#2f2f2f",color:'#fff',height:'40px'}
+    }
+    ),
+    customBodyRender: (value, tableMeta, updateValue) => {  
+      console.log('output of value is : ');
+      console.log(value);
+      console.log('output of tableMeta is :')
+      console.log(tableMeta);
+            return (
+                    <Button sx={{ border: 0,padding:0 }} variant='outlined' size='small' color='inherit'
+                      //sx={{fontSize:'5px'}}                    
+                    onClick={()=>alert(tableMeta.rowIndex)}><DeleteForeverIcon fontSize='small' color="error" />                      
+                     </Button>
+                    );
+                  }
+ }
+}
+
 ];
 
 const data = [
@@ -51,20 +135,35 @@ const options = {
   
 };
 
+const customTheme = createTheme({
+  overrides: {
+      MuiTableCell: {
+          root: {
+              padding: '0px',
+          },
+      },
+  },
+})
 
 
 export default function Home() {
+ 
+
+
   return (
     <div>
       {/*<Box sx={{maxWidth:{xs:'100px',md:'600px'}}}>*/}
     <Grid container>
       <Grid item xs={12} md={12}>
+      <ThemeProvider  theme={customTheme}>
         <MUIDataTable
           title={"Liste des abonnés"}
           data={data}
           columns={columns}
           options={options}
         />
+      </ThemeProvider >
+
         </Grid>
       </Grid>
       {/* </Box> */}
