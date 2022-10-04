@@ -5,7 +5,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import AdbIcon from '@mui/icons-material/Adb';
- 
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+
 /////***NOO maybe false***//import Link from '@mui/material/Link';
  
 //import IconButton from '@mui/material/IconButton';
@@ -13,6 +14,12 @@ import AdbIcon from '@mui/icons-material/Adb';
 //import AdbIcon from '@mui/icons-material/Adb';
 //import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 
+var pagehome = document.location.pathname=="/home" ? 'inline-flex':'none'
+let widthhome = window.innerWidth > 768 ? "inline-flex" : "none"
+
+
+
+console.log('widthhome est egale a : ', widthhome)
 
 export default function Mainwithnav() {
  
@@ -62,7 +69,12 @@ export default function Mainwithnav() {
             About
           </Button>
         </Box>
-        <AdbIcon sx={{display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+        <Button variant="contained" sx={{display: pagehome}}>
+           {/* <p sx={{display: widthhome }}>Ajouter un abonnement &nbsp;</p><PersonAddAlt1Icon sx={{display:'flex', mr: 1 }} /> */}
+           <span style={{display: widthhome}}>Ajouter un abonnement</span>
+           <PersonAddAlt1Icon sx={{display:'flex', mr: 1 }} />
+        </Button>
+        
 
         </Toolbar>
       </AppBar>
