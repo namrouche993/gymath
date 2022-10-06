@@ -9,6 +9,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import About from '../About.js';
+import Button_edit_remove from './Button_edit_remove.js'
 
 let widtha = window.innerWidth;
 let widthname = window.innerWidth > 768 ? "" : "."
@@ -110,14 +111,31 @@ export default function Tableabonnement() {
         console.log(tableMeta);
               return (
                 <div style={{display:'inline-flex'}}>
-                      <Button sx={{ border: 0,padding:0 }} variant='outlined' size='small' color='inherit'
+
+                      {/* <Button sx={{ border: 0,padding:0 }} variant='outlined' size='small' color='inherit'
                         //sx={{fontSize:'5px'}}                    
                       onClick={()=>alert(tableMeta.rowIndex)}><EditIcon fontSize="small"/>                      
-                       </Button>
+                       </Button> */}
+                       
+                       <Button_edit_remove 
+                        modifiedTitle="Modifier l'abonnement"
+                        idabonne={tableMeta.rowData[0]}
+                        //name={data[tableMeta.rowIndex][1]}
+                        name={tableMeta.rowData[1]}
+                        datedenaissance={tableMeta.rowData[2]}
+                        dateabonnement={tableMeta.rowData[3]}
+                        montant={tableMeta.rowData[4]}
+                        notes={tableMeta.rowData[5]}
+
+                        logobutton={<EditIcon fontSize="small" />} 
+                        />
+
                          <Button sx={{ border: 0,padding:0 }} variant='outlined' size='small' color='inherit'
                          //sx={{fontSize:'5px'}}                    
-                       onClick={()=>{handleClickOpenn()}}><DeleteForeverIcon fontSize='small' color="error" />                      
+                       onClick={()=>alert(tableMeta.rowIndex)}><DeleteForeverIcon fontSize='small' color="error" />                      
                         </Button>
+
+                   
                 </div>
                       );
                     }
@@ -126,6 +144,7 @@ export default function Tableabonnement() {
   }
   ];
   
+  //const logoedit = <EditIcon/>
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpenn = () => {
@@ -169,7 +188,9 @@ export default function Tableabonnement() {
    return (
     <div>
       {/*<Box sx={{maxWidth:{xs:'100px',md:'600px'}}}>*/}
-    {/* <About openn={open} handleClose={openda} /> */}
+    <Button_edit_remove/>
+
+     {/* openn={open} handleClose={openda} /> */}
     <Grid container>
       <Grid item xs={12} md={12}>
       <ThemeProvider  theme={customTheme}>
