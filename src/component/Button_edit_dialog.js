@@ -76,16 +76,42 @@ BootstrapDialogTitle.propTypes = {
 
 export default function Button_edit_dialog(props) {
   const [open, setOpen] = React.useState(false);
-  const [nameetprenomstate,setNameetprenomstate] = React.useState(props.name)
-  const [noteab, setNoteab] = React.useState(props.notes);
-  const [montantstate, setMontantstate] = React.useState(props.montant)
 
-  const [birthday,setBirthday] =React.useState(props.datedenaissance)
-  const inputdatedenaissance = React.useRef()
 
   const refeditnometprenom = React.useRef()
+  const [nameetprenomstate,setNameetprenomstate] = React.useState(props.name)
+  const Changeeditnometprenom = () => {
+    setNameetprenomstate(refeditnometprenom.current.value)
+  }
+
+
   const refmontant = React.useRef()
+  const [montantstate, setMontantstate] = React.useState(props.montant)
+  const Changemontant = () => {
+    setMontantstate(refmontant.current.value)
+  }
+
+  const inputdatedenaissance = React.useRef();
+  const [birthday,setBirthday] =React.useState(props.datedenaissance)
+  const Changedatedenaissance = () => {
+    setBirthday(inputdatedenaissance.current.value)
+  }
+
+
+    // i didn't use useref beacause it already used it with props component "BasicDateTimePicker"
+  const datenoww = Moment().format('YYYY-MM-DDThh:mm') 
+  const [dateabonnementstate,setDateabonnementstate] = React.useState(props.dateabonnement)
+  const Changedateabonnement = (event) => {
+    setDateabonnementstate(event.target.value)
+      //console.log('le eventtt cuurent valuee est : ' + event.current.value )
+  }
+
+
   const inputTextnote = useRef();
+  const [noteab, setNoteab] = React.useState(props.notes);
+  const Changenote = () => {
+    setNoteab(inputTextnote.current.value)
+  }
 
 
 
@@ -96,29 +122,7 @@ export default function Button_edit_dialog(props) {
     setOpen(false);
   };
 
-    const Changedatedenaissance = () => {
-      setBirthday(inputdatedenaissance.current.value)
-    }
 
-    const Changeeditnometprenom = () => {
-      setNameetprenomstate(refeditnometprenom.current.value)
-    }
-
-    const Changemontant = () => {
-      setMontantstate(refmontant.current.value)
-    }
-
-    const Changenote = () => {
-      setNoteab(inputTextnote.current.value)
-    }
-
-    const datenoww = Moment().format('YYYY-MM-DDThh:mm') 
-    const [dateabonnementstate,setDateabonnementstate] = React.useState(props.dateabonnement)
-
-    const Changedateabonnement = (event) => {
-      setDateabonnementstate(event.target.value)
-        //console.log('le eventtt cuurent valuee est : ' + event.current.value )
-    }
 
 
    return (
@@ -173,12 +177,6 @@ export default function Button_edit_dialog(props) {
             </Grid>
             <Grid container item direction='column' md={6}  rowSpacing={4}  >
              <Grid item md={4}>
-                {/* <TextField
-                  required
-                  id="editdatedenaissance"
-                  label="Date de naissance :"
-                  defaultValue={props.datedenaissance}
-                /> */}
                 <TextField
                               id="editdatedenaissance"
                               label="Date de naissance"
@@ -194,26 +192,12 @@ export default function Button_edit_dialog(props) {
                 />
              </Grid>
              <Grid item md={4}>
-
-                {/* <TextField
-                  required //aa
-                  id="editdateabonnement" //aza
-                  label="Date d'abonnement :"
-                  defaultValue={props.dateabonnement}
-                /> */}
-
-                <BasicDateTimePicker datedebutabonnement={props.dateabonnement} Changedateabonnement={Changedateabonnement}/>
+                <BasicDateTimePicker 
+                   datedebutabonnement={props.dateabonnement}
+                   Changedateabonnement={Changedateabonnement}
+                />
 
             </Grid>
-
-            {/* <Grid item md={4}>
-                <TextField
-                  required
-                  id="editda"
-                  label="Notes :"
-                  defaultValue={props.notes}
-                />
-            </Grid> */}
 
             </Grid>
             </Grid>
@@ -239,29 +223,6 @@ export default function Button_edit_dialog(props) {
         <h4> Test date d'abonnement : {dateabonnementstate} </h4>
 
         <h4>la note : {noteab}</h4>
-
-
-          {/* <Typography gutterBottom>
-            Date de debut d'abonnement  : {props.dateabonnement}
-          </Typography>
-
-          <Typography gutterBottom>
-            Montant payes  : {props.montant}
-          </Typography>
-
-          <Typography gutterBottom>
-            Notes : {props.notes}
-          </Typography> */}
-{/* 
-          <Typography gutterBottom>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-            Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
-          </Typography>
-          <Typography gutterBottom>
-            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
-            magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
-            ullamcorper nulla non metus auctor fringilla.
-          </Typography> */}
 
         </DialogContent>
         <DialogActions>

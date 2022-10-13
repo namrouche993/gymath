@@ -77,16 +77,46 @@ BootstrapDialogTitle.propTypes = {
 
 export default function Button_add_dialog(props) {
   const [open, setOpen] = React.useState(false);
-  const [nameetprenomstate,setNameetprenomstate] = React.useState()
-  const [noteab, setNoteab] = React.useState();
-  const [montantstate, setMontantstate] = React.useState(2300)
 
-  const [birthday,setBirthday] =React.useState("1990-01-01")
-  const inputdatedenaissance = React.useRef()
 
   const refeditnometprenom = React.useRef()
+  const [nameetprenomstate,setNameetprenomstate] = React.useState()
+  const Changeeditnometprenom = () => {
+    setNameetprenomstate(refeditnometprenom.current.value)
+  }
+
+  const inputdatedenaissance = React.useRef()
+  const [birthday,setBirthday] =React.useState("1990-01-01")
+  const Changedatedenaissance = () => {
+    setBirthday(inputdatedenaissance.current.value)
+  }
+
+
+  // i didn't use useref beacause it already used it with props component "BasicDateTimePicker"
+  const datenoww = Moment().format('YYYY-MM-DDThh:mm')        
+  const [dateabonnementstate,setDateabonnementstate] = React.useState(datenoww)
+  const Changedateabonnement = (event) => {
+      setDateabonnementstate(event.target.value)
+      //console.log('le eventtt cuurent valuee est : ' + event.current.value )
+  }
+
+
   const refmontant = React.useRef()
+  const [montantstate, setMontantstate] = React.useState(2300)
+  const Changemontant = () => {
+    setMontantstate(refmontant.current.value)
+  }
+
+
+
   const inputTextnote = useRef();
+  const [noteab, setNoteab] = React.useState();
+  const Changenote = () => {
+    setNoteab(inputTextnote.current.value)
+  }
+
+
+
 
 
 
@@ -97,37 +127,15 @@ export default function Button_add_dialog(props) {
     setOpen(false);
   };
 
-    const Changedatedenaissance = () => {
-      setBirthday(inputdatedenaissance.current.value)
-    }
 
-    const Changeeditnometprenom = () => {
-      setNameetprenomstate(refeditnometprenom.current.value)
-    }
 
-    const Changemontant = () => {
-      setMontantstate(refmontant.current.value)
-    }
 
-    const Changenote = () => {
-      setNoteab(inputTextnote.current.value)
-    }
 
-    const datenoww = Moment().format('YYYY-MM-DDThh:mm') 
-    const [dateabonnementstate,setDateabonnementstate] = React.useState(datenoww)
 
-    const Changedateabonnement = (event) => {
-        setDateabonnementstate(event.target.value)
-        //console.log('le eventtt cuurent valuee est : ' + event.current.value )
-    }
 
 
    return (
     <div>
-      {/* <Button sx={{ border: 0,padding:0 }} variant='outlined' size='small' color='inherit' onClick={handleClickOpen}>
-        {props.logobutton}
-      </Button> */}
-
       <Button variant="contained" size="small" onClick={handleClickOpen} sx={{display: props.display}}>
            <span style={{display: props.spandisplay}} >Ajouter un abonnement</span>
            <PersonAddAlt1Icon sx={{display:'flex', mr: 1 }} />
@@ -180,12 +188,6 @@ export default function Button_add_dialog(props) {
             </Grid>
             <Grid container item direction='column' md={6}  rowSpacing={4}  >
              <Grid item md={4}>
-                {/* <TextField
-                  required
-                  id="editdatedenaissance"
-                  label="Date de naissance :"
-                  defaultValue={props.datedenaissance}
-                /> */}
                 <TextField
                               id="editdatedenaissance"
                               label="Date de naissance"
@@ -201,27 +203,13 @@ export default function Button_add_dialog(props) {
                 />
              </Grid>
              <Grid item md={4}>
-
-                {/* <TextField
-                  required //aa
-                  id="editdateabonnement" //aza
-                  label="Date d'abonnement :"
-                  defaultValue={props.dateabonnement}
-                /> */}
-
-                <BasicDateTimePicker datedebutabonnement={dateabonnementstate} Changedateabonnement={Changedateabonnement}/>
+                
+                <BasicDateTimePicker 
+                   datedebutabonnement={dateabonnementstate}
+                   Changedateabonnement={Changedateabonnement}
+                   />
 
             </Grid>
-
-            {/* <Grid item md={4}>
-                <TextField
-                  required
-                  id="editda"
-                  label="Notes :"
-                  defaultValue={props.notes}
-                />
-            </Grid> */}
-
             </Grid>
             </Grid>
          

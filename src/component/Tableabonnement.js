@@ -10,6 +10,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import About from '../About.js';
 import Button_edit_dialog from './Button_edit_dialog.js'
+import Button_delete_dialog from './Button_delete_dialog.js'
 
 let widtha = window.innerWidth;
 let widthname = window.innerWidth > 768 ? "" : "."
@@ -130,10 +131,14 @@ export default function Tableabonnement() {
                         logobutton={<EditIcon fontSize="small" />} 
                         />
 
-                         <Button sx={{ border: 0,padding:0 }} variant='outlined' size='small' color='inherit'
+                        <Button_delete_dialog nometprenom={tableMeta.rowData[1]}
+
+                        />
+
+                      {/* <Button sx={{ border: 0,padding:0 }} variant='outlined' size='small' color='inherit'
                          //sx={{fontSize:'5px'}}                    
-                       onClick={()=>alert(tableMeta.rowIndex)}><DeleteForeverIcon fontSize='small' color="error" />                      
-                        </Button>
+                          onClick={()=>alert(tableMeta.rowIndex)}><DeleteForeverIcon fontSize='small' color="error" />                      
+                      </Button> */}
 
                    
                 </div>
