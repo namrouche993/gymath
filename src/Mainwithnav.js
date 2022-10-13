@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import AdbIcon from '@mui/icons-material/Adb';
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import Button_add_dialog from './component/Button_add_dialog';
 
 /////***NOO maybe false***//import Link from '@mui/material/Link';
  
@@ -69,12 +69,8 @@ export default function Mainwithnav() {
             About
           </Button>
         </Box>
-        <Button variant="contained" sx={{display: pagehome}}>
-           {/* <p sx={{display: widthhome }}>Ajouter un abonnement &nbsp;</p><PersonAddAlt1Icon sx={{display:'flex', mr: 1 }} /> */}
-           <span style={{display: widthhome}}>Ajouter un abonnement</span>
-           <PersonAddAlt1Icon sx={{display:'flex', mr: 1 }} />
-        </Button>
-        
+
+        <Button_add_dialog display={pagehome} spandisplay={widthhome}/>
 
         </Toolbar>
       </AppBar>
