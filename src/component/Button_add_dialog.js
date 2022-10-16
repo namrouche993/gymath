@@ -93,19 +93,27 @@ export default function Button_add_dialog(props) {
 
 
   // i didn't use useref beacause it already used it with props component "BasicDateTimePicker"
-  const datenoww = Moment().format('YYYY-MM-DDThh:mm')        
-  const [dateabonnementstate,setDateabonnementstate] = React.useState(datenoww)
-  const Changedateabonnement = (event) => {
-      setDateabonnementstate(event.target.value)
-      //console.log('le eventtt cuurent valuee est : ' + event.current.value )
-  }
+  const [datenoww,setDatenoww] = React.useState(Moment().format('YYYY-MM-DDThh:mm:ss'))
+          
+  const [dateabonnementstate,setDateabonnementstate] = React.useState(Moment().format('YYYY-MM-DDThh:mm:ss'))
 
+   const Changedateabonnement = (event) => {
+       setDateabonnementstate(event.target.value)
+       //console.log('le eventtt cuurent valuee est : ' + event.current.value )
+   }
 
+    useEffect(() => {
+           setDateabonnementstate(Moment().format('YYYY-MM-DDThh:mm:ss'))
+    },[open])
+  
+  
   const refmontant = React.useRef()
   const [montantstate, setMontantstate] = React.useState(2300)
   const Changemontant = () => {
     setMontantstate(refmontant.current.value)
   }
+
+  
 
 
 
@@ -126,6 +134,7 @@ export default function Button_add_dialog(props) {
   const handleClose = () => {
     setOpen(false);
   };
+
 
 
 
@@ -205,9 +214,10 @@ export default function Button_add_dialog(props) {
              <Grid item md={4}>
                 
                 <BasicDateTimePicker 
-                   datedebutabonnement={dateabonnementstate}
+                   datedebutabonnement=  {dateabonnementstate}
                    Changedateabonnement={Changedateabonnement}
                    />
+                   
 
             </Grid>
             </Grid>
@@ -234,6 +244,9 @@ export default function Button_add_dialog(props) {
         <h4> Test date d'abonnement : {dateabonnementstate} </h4>
 
         <h4>la note : {noteab}</h4>
+        <h4>datenoww est  : {datenoww} </h4>
+        <h4>Moment : {Moment().format('YYYY-MM-DDThh:mm:ss')} </h4>
+
 
         </DialogContent>
         <DialogActions>

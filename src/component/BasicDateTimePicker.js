@@ -6,7 +6,7 @@ import Moment from 'moment';
 
 export default function BasicDateTimePicker(props) {
   //var datenow = Date().toLocaleString()
-  const datenow = Moment().format('YYYY-MM-DDThh:mm') 
+  //const datenow = Moment().format('YYYY-MM-DDThh:mm') 
   // const timenow = Moment().format('hh:mm') 
   
   const datetimeabonnement = React.useRef()
