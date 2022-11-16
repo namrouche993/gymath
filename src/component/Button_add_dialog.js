@@ -23,6 +23,7 @@ import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 //import { DateTimePicker } from '@mui/x-date-pickers-pro/DateTimePicker';
 
 import BasicDateTimePicker from './BasicDateTimePicker.js'
+import { useState } from 'react';
 //https://mui.com/material-ui/react-dialog/
 
 let widthdialogzoom = window.innerWidth > 768 ? "120%" : "100%"
@@ -123,11 +124,6 @@ export default function Button_add_dialog(props) {
     setNoteab(inputTextnote.current.value)
   }
 
-
-
-
-
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -135,6 +131,23 @@ export default function Button_add_dialog(props) {
     setOpen(false);
   };
 
+  //const [description,setDescription]=useState("");
+
+  const handleSave = async () => {
+     const body= {name : nameetprenomstate,
+                  dob : birthday,
+                  dos:  dateabonnementstate,
+                  notes:  noteab,
+                  montant: montantstate
+                }
+     const response = await fetch("http://localhost:3001/api/v1/gymathletes",{
+      method:"POST",
+      headers: {"Content-Type":"application/json"},
+      body:JSON.stringify(body)
+     })
+     console.log('la reponse est : '+ response);
+  
+    };
 
 
 
@@ -250,7 +263,7 @@ export default function Button_add_dialog(props) {
 
         </DialogContent>
         <DialogActions>
-          <Button variant="outlined" autoFocus onClick={handleClose}>
+          <Button variant="outlined" autoFocus onClick={handleSave}>
           Sauvegarder <SaveIcon />            
           </Button>
         </DialogActions>
