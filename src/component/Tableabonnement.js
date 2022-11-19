@@ -11,14 +11,30 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import About from '../About.js';
 import Button_edit_dialog from './Button_edit_dialog.js'
 import Button_delete_dialog from './Button_delete_dialog.js'
+import { Diversity3 } from '@mui/icons-material';
+import Moment from 'moment';
+import { useSelector,useDispatch } from 'react-redux'
 
 let widtha = window.innerWidth;
-let widthname = window.innerWidth > 768 ? "" : "."
+let widthname = window.innerWidth > 768 ? " " : "."
 //https://codesandbox.io/s/github/gregnb/mui-datatables
 //https://github.com/gregnb/mui-datatables
 
 
 export default function Tableabonnement() {
+  // const columns = [
+  //    {name: 'id'},
+  // {name:'name'},
+  // {name:'dob',label:'Date de naissance'},
+  // {name:'dos'},
+  // {name:'montant'},
+  // {name:'notes'}
+  // ]
+
+  
+  const counter2 = useSelector(state => state.counter);
+  const logged2 = useSelector(state => state.logged);
+
   const columns = [
     {name:'id',
     options:{
@@ -30,7 +46,7 @@ export default function Tableabonnement() {
        setCellHeaderProps: (value) => ({style:{background: "#2f2f2f",color:'#fff',height:'40px',width:'4%'}})} 
   
     },
-    {name:"nom et Prenom",
+    {name:"name",label:'Nom et Prenom',
     options:{
        setCellProps:()=>({
         style:{
@@ -39,27 +55,37 @@ export default function Tableabonnement() {
        }),
     setCellHeaderProps: (value) => ({style:{background: "#2f2f2f",color:'#fff',height:'40px',width:'15%'}})} 
     },
-    {name:"Date de naissance",
+    {name:'dob',label:"Date de naissance",
     options:{
       setCellProps:()=>({
        style:{
          padding:'3px 3px 3px 3%',letterSpacing:'0.13071em'
        }
       }),
+      customBodyRender: (value, tableMeta, updateValue) => {  
+        return (
+          <p>{Moment(value).format('YYYY-MM-DD')}</p>
+        )
+},
       //filterOptions: { fullWidth: false }, it do nothing
       setCellHeaderProps: (value) => ({style:{background: "#2f2f2f",color:'#fff',height:'40px',width:'15%'}})} 
   },
-    {name:"date de abonnement",
+    {name:'dos',label:"date de abonnement",
     options:{
       setCellProps:()=>({
        style:{
          padding:'3px 3px 3px 5%',letterSpacing:'0.13071em'
        }
       }),
+      customBodyRender: (value, tableMeta, updateValue) => {  
+        return (
+          <p>{Moment(value).format('YYYY-MM-DD hh:mm:ss')}</p>
+        )
+},
       //filterOptions: { fullWidth: false }, it do nothing
       setCellHeaderProps: (value) => ({style:{background: "#2f2f2f",color:'#fff',height:'40px',width:'15%'}})} 
   },
-    {name:"Montant",
+    {name:'montant',label:"Montant",
     options:{
       setCellProps:()=>({
        style:{
@@ -77,7 +103,7 @@ export default function Tableabonnement() {
     
     } 
   },
-    {name:"Notes",
+    {name:'notes',label:"Notes",
     options:{
       setCellProps:()=>({
        style:{
@@ -86,7 +112,7 @@ export default function Tableabonnement() {
       }),    setCellHeaderProps: (value) => ({style:{background:'#2f2f2f',color:'#fff',width:'30%'}})} 
   },
   {
-    name:widthname,options:{
+    name:'editremoverenewbttn',label:widthname,options:{
       
       setCellProps:()=>({
         style:{
@@ -149,6 +175,7 @@ export default function Tableabonnement() {
   }
   ];
   
+  
   //const logoedit = <EditIcon/>
   const [open, setOpen] = React.useState(false);
 
@@ -159,6 +186,33 @@ export default function Tableabonnement() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const [datagymath,setDatagymath] =React.useState([]);
+
+  // const jsondataselector = useSelector(state => state.jsondatastate);
+  // setDatagymath(jsondataselector)
+
+  const getgymath = async () => {
+    try{
+      const response = await fetch('http://localhost:3001/api/v1/gymathletes');
+      const jsondata = await response.json();
+      console.log('jsondata est : ' + jsondata.name)
+      setDatagymath(jsondata);
+
+     } catch(err){
+      console.error(err.messaage);
+     }
+
+  }
+
+  React.useEffect(()=>{
+    console.log('we are inside useeffect !!!')
+    getgymath();
+  },[counter2])
+
+  
+  console.log("la data est : " + datagymath)
+
 
   const data = [
    [1,"Joe James", "1993-12-21","2022-09-22T20:11", 2300,"","editremovebttn"],
@@ -196,12 +250,25 @@ export default function Tableabonnement() {
     {/* <Button_edit_dialog/> */}
 
      {/* openn={open} handleClose={openda} /> */}
+     {"counter2 egale a : " + counter2}
+     {datagymath.map(dd => (
+      <tr>
+        <td>{dd.id}</td>
+        <td>{dd.name}</td>
+        <td>{dd.dob}</td>
+        <td>{dd.dos}</td>
+        <td>{dd.montant}</td>
+        <td>{dd.notes}</td>
+      </tr>
+     ))
+      }
+
     <Grid container>
       <Grid item xs={12} md={12}>
       <ThemeProvider  theme={customTheme}>
         <MUIDataTable
           title={"Liste des abonnés"}
-          data={data}
+          data={datagymath}
           columns={columns}
           options={options}
         />

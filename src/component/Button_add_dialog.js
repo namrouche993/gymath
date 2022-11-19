@@ -17,6 +17,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import SaveIcon from '@mui/icons-material/Save';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 
+import { useSelector,useDispatch } from 'react-redux'
+import {increment,decrement} from '../reducers/actions'
+
 
 //import dayjs from 'dayjs';
 
@@ -133,6 +136,8 @@ export default function Button_add_dialog(props) {
 
   //const [description,setDescription]=useState("");
 
+  const dispach = useDispatch();
+
   const handleSave = async () => {
      const body= {name : nameetprenomstate,
                   dob : birthday,
@@ -146,8 +151,11 @@ export default function Button_add_dialog(props) {
       body:JSON.stringify(body)
      })
      console.log('la reponse est : '+ response);
-  
+     dispach(increment(10))
+     setOpen(false);
     };
+
+    
 
 
 
